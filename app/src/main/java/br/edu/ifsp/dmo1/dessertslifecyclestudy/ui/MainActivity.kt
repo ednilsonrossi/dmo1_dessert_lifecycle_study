@@ -1,6 +1,7 @@
 package br.edu.ifsp.dmo1.dessertslifecyclestudy.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
@@ -9,6 +10,7 @@ import br.edu.ifsp.dmo1.dessertslifecyclestudy.data.Datasource
 import br.edu.ifsp.dmo1.dessertslifecyclestudy.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
+    private val TAG = "DessertsLifecycle"
     private lateinit var binding: ActivityMainBinding
     private var units: Int = 0;
     private var amount: Int = 0;
@@ -29,6 +31,27 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
         configList()
         updateUI()
+        Log.d(TAG, "State == created")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "State == started (visible)")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "State == resumed (visible)")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "State == paused (partialy visible)")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "State == stopped (hidden)")
     }
 
     /**
