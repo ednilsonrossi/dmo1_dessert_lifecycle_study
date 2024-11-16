@@ -4,11 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import br.edu.ifsp.dmo1.dessertslifecyclestudy.R
 import br.edu.ifsp.dmo1.dessertslifecyclestudy.data.Datasource
 import br.edu.ifsp.dmo1.dessertslifecyclestudy.databinding.ActivityMainBinding
 
@@ -22,8 +18,31 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /**
+         * Caso exista uma instância de estado salva, recupera-se
+         * os dados que foram gravados quando
+         */
+        if (savedInstanceState != null) {
+            units = savedInstanceState.getInt("units")
+            amount = savedInstanceState.getInt("amount")
+        }
+
         configList()
         updateUI()
+    }
+
+    /**
+     * Método é chamado antes que a Activity seja destruída, então é utilizado
+     * para salvar o estado de uma Activity para que seja restaurado posteriormente.
+     *
+     * Método é chamado quando existe processo que destroi a Activity como em rotação
+     * da tela, mudança de idioma ou mesmo para liberação de memória do dispositivo.
+     *
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("units", units)
+        outState.putInt("amount", amount)
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
