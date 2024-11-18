@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        Log.d(TAG, "Save Instance")
         outState.putInt("units", units)
         outState.putInt("amount", amount)
     }
